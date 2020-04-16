@@ -1,0 +1,49 @@
+<html>
+<head>
+
+</head>
+<body>
+    <h1> All Rents List</h1>
+    <div id="list"></div>
+</body>
+
+<script>
+const electron = require ("electron");
+const {ipcRenderer} = electron;
+ipcRenderer.send("rent:request:list");
+
+ipcRenderer.on("rent:request:list", (event, rent) => {
+    const listDiv = document.getElementById("list");
+    rent.forEach(rent => {
+        const rentDiv = document.createElement("div");
+        const nameParagraph = document.createElement("p");
+        nameParagraph.innerHTML = `Name: ${rent.name}`;
+
+        const numberParagraph =document.createElement("p");
+        numberParagraph.innerHTML = `Phone Number: ${rent.number}`;
+
+        const rentdateParagraph =document.createElement("p");
+        rentdateParagraph.innerHTML = `Date: ${rent.rentdate}`;
+        
+        const returndateParagraph =document.createElement("p");
+        returndateParagraph.innerHTML = `Date: ${rent.returndate}`;
+
+        const carParagraph =document.createElement("p");
+        carParagraph.innerHTML = `Car Type: ${rent.car}`;
+
+
+        const hr = document.createElement("hr");
+
+        rentDiv.appendChild(nameParagraph);
+        rentDiv.appendChild(numberParagraph);
+        rentDiv.appendChild(rentdateParagraph);
+        rentDiv.appendChild(returndateParagraph);
+        rentDiv.appendChild(carParagraph);
+        rentDiv.appendChild(hr);
+
+        listDiv.append(rentDiv);
+    });
+
+});
+</script>
+</html>

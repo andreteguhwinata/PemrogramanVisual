@@ -1,0 +1,61 @@
+<html>
+<head>
+
+</head>
+<body>
+    <h1 style="background-color: yellowgreen;">Hello! Wellcome to Rent Car Application!</h1>
+    <div id="list"></div>
+</body>
+
+<script>
+const electron = require ("electron");
+const {ipcRenderer} = electron;
+ipcRenderer.send("rent:request:today");
+
+ipcRenderer.on("rent:request:today", (event, rent) => {
+    const listDiv = document.getElementById("list");
+    rent.forEach(rent => {
+        const rentDiv = document.createElement("div");
+        const nameParagraph = document.createElement("p");
+        nameParagraph.innerHTML = `Name: ${rent.name}`;
+
+        const numberParagraph =document.createElement("p");
+        numberParagraph.innerHTML = `Phone Number: ${rent.number}`;
+
+        const rentdateParagraph =document.createElement("p");
+        rentdateParagraph.innerHTML = `Date: ${rent.rentdate}`;
+        
+        const returndateParagraph =document.createElement("p");
+        returndateParagraph.innerHTML = `Date: ${rent.returndate}`;
+
+        const carParagraph =document.createElement("p");
+        carParagraph.innerHTML = `Car Type: ${rent.car}`;
+
+        const doneParagraph =document.createElement("p");
+        doneParagraph.innerHTML = `Done: ${rent.done ? "Yes" : "No"}`;
+        
+        const doneButton = document.createElement("button");
+        doneButton.innerHTML = "Done";
+        doneButton.disabled = rent.done ? true : false;
+        doneButton.onclick = () => done(rent.id);
+
+        const hr = document.createElement("hr");
+
+        rentDiv.appendChild(nameParagraph);
+        rentDiv.appendChild(numberParagraph);
+        rentDiv.appendChild(rentdateParagraph);
+        rentDiv.appendChild(returndateParagraph);
+        rentDiv.appendChild(carParagraph);
+        rentDiv.appendChild(doneParagraph);
+        rentDiv.appendChild(doneButton);
+        rentDiv.appendChild(hr);
+
+        listDiv.append(rentDiv);
+    });
+
+    });
+    const done = id => {
+        ipcRenderer.send("rent:done", id);
+    }
+</script>
+</html>
