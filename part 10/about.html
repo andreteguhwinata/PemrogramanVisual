@@ -1,0 +1,15 @@
+<html>
+    <head></head>
+
+        <body>
+            Nama    : I Gede Andre Teguh Winata <br>
+            NIM     : 1801010044 <br>
+            Prodi   : Sistem Informasi <br>
+            <img src="foto.jpg" width="400" height="480">
+        </body>
+        <script>
+        const electron = require ("electron");
+        const {ipcRenderer} = electron;
+        ipcRenderer.send("appointment:about");
+        </script>
+</html>
