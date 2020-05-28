@@ -53,11 +53,11 @@ ipcMain.on("appointment:create", (event, appointment) =>{
     allAppointments.push(appointment)
 })
 
-ipcMain.on("appointment:request:list", event=> {
+ipcMain.on("appointment:request:list", (event)=> {
     mainWindow.webContents.send("appointment:response:list", allAppointments)
 })
 
-ipcMain.on("appointment:request:today", event => {
+ipcMain.on("appointment:request:today", (event) => {
     sendTodayAppointments();
 })
 
