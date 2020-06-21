@@ -1,0 +1,25 @@
+<html>
+    <head></head>
+    <style>
+    body{
+        background-image: url('car.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        color: yellowgreen;
+    }
+    </style>
+
+        <body>
+            <h4><center>ABOUT ME!</center></h4>
+            Nama    : I Gede Andre Teguh Winata <br>
+            NIM     : 1801010044 <br>
+            Prodi   : Sistem Informasi <br>
+            <img src="foto.jpg" width="200" height="240">
+        </body>
+        <script>
+        const electron = require ("electron");
+        const {ipcRenderer} = electron;
+        ipcRenderer.send("appointment:about");
+        </script>
+</html>
